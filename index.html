@@ -1,67 +1,143 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>Food Trivia</title>
-<!-- setting up viewport -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Link to bootstrap -->
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<meta charset="UTF-8">
+	<title>Working Title</title>
+ 	
+ 	<!-- CSS reset sheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
 
-<!-- Jquery Link -->	
-<script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Our Own CSS File -->
+    <link rel="stylesheet" href="style.css">
 
-<!-- Moment JS -->
-  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-<!-- Link to firebase -->
-<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
-<!-- Linking Style sheet -->
-<link rel="stylesheet" type="text/css" href="assets/css/trivia.css">
-<!-- Linking Javascript file -->
-<script scr="assets/jss/trivia.js" type="text/javascript"></script>
+    <!-- Firebase Link -->
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 </head>
-<body  
-
-	<div class="container" id = "mainContainer" style="height: 95vh;border-style:solid; border-width:1px;border-color:black;">
-	<div class="row"></div>
-	<div class="col-lg-12" id = "mainHeading" style="height: 10vh;border-width:1px;border-style:solid;margin-top: 50px;
-			border-color:black;"><center><h1>Team play</h1></center></div>
-
- <div class="col-lg-4" id="left" style="float: left; padding: 0px;">			
-	
-
-	<div class ="col-lg-6" id  = "masterPaneltop" style="border-style:solid;height: 42vh;border-width:1px;
-			border-color:black;width: 100%; padding: 0px;"><center>
-			<img src= "https://placeholdit.imgix.net/~text?txtsize=28&txt=50%C3%9750&w=50&h=50"	width="20%"></center>
- 	</div>	
- 	 	<!--<div class="row" ></div> -->
- 	<div class ="col-lg-6" id  = "masterPanelbot" style="border-style:solid;height: 34vh;border-width:1px;
-			border-color:black; float: left;width: 100%; padding: 0px;"><center>
-			<img src= "http://www.engraversnetwork.com/files/placeholder.jpg" style="width:100%; height: 55%;"
-			></center> 
-	</div>
-
- </div>
- <div class="col-lg-8" id="Right" style="float: left; padding: 0px;">			
-		<div class="col-lg-6"  id  = "teamPaneltop" style="border-style:solid;height: 42vh;border-width:1px;
-			border-color:black;width: 100%; padding: 0px;">Right</div>	
-			<div class="row" ></div>
-		<div class="col-lg-6"  id  = "teamPanelbot" style="border-style:solid;height: 34vh;border-width:1px;
-			border-color:black;width: 100%; padding: 0px;">Chat Area</div>
-
- </div>
-
- </div>
-
- 	
-
-
-
-	</div>
-
 <body>
 
+<!-- Jumbotron header -->
+<div class="header">
+    <h1 class="text-center">Working Title</h1>
+</div>
+
+<!-- game content-->
+<div class="row">
+	<!-- first row-->
+	<div class="col-sm-3">
+		
+		<!-- main Player-->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" id = "p1-name">Blind Player: (p1 Name)</h3>
+			</div>
+			<div class= "pannel-icon">
+				<img id= "p1-img" src="" ><p>P1-pic goes here</p>
+				<h2 class="current-score" id= "p1-score"> p1 score</h2>
+			</div>
+		</div>
+	 	
+	 	<!--guess input, submit button-->
+		<form role="form">
+			<div class="form-group">
+				<label for="guess-input">Your guess:</label>
+				<input class="form-control" id="guess-input" type="text">
+			</div>
+			<button class="btn btn-default" id="add-guess" type="submit">Submit</button>
+		</form>
+
+		<!-- wrong guesses-->
+		<div id = "guesses">
+		<h3>You've already tried:</h3>
+		<p> *EXAMPLE...bad guess...</p>
+
+	 	</div>
+	</div>
+
+	<!--middle col-->
+	<div class = "col-sm-6">
+
+		<!--sign in and minute timer-->
+		<div class ="top">
+			<!--sign in, dissapears once all player spots are filled and turns to minute timer-->
+			<div class="form-group">
+				<label for="new-player">Player Name:</label>
+				<input class="form-control" id="new-player" type="text">
+				<button class="btn btn-default" id="add-player" type="submit">Submit</button>
+			</div>
+			<!--tiimer-->
+			<div id= timer>
+				<p>timer goes here</p>
+			</div>
+		</div>
+
+		<!--generated item-->
+		<div id="random-item">
+			<p>generated item goes here</p>
+		</div>
+		<!--player chat-->
+		<div id="chat">
+			<div id="chat-messages">
+				<p>this is a chat msg</p>
+			</div>
+			<div id="chat-bar">
+			<input id="chat-input"/>
+			<button id="chat-send">Send</button>
+			</div>
+		</div>
+
+	</div>
+
+	<!--Right col with helper players-->
+	<div class = "col-sm-3">
+		<!--1st helper player-->
+		<div id ="player2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" id= "p2-name">Player 2Name</h3>
+			</div>
+			<div class= "pannel-icon">
+				<img id= "p3-img" src=""><p>img2</p>
+				<h2 class="current-score" id="p2-score">Player 2score</h2>
+			</div>
+		</div>
+		</div>
+		<!--2nd helper player-->
+		<div id ="player3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title" id="p3-name">Player 3Name</h3>
+				</div>
+				<div class= "pannel-icon">
+					<img id= "p3-img" src=""><p>img3</p>
+					<h2 class="current-score" id= "p3-score">Player 3score</h2>
+				</div>
+			</div>
+		</div>
+		<!--3rd helper player-->
+		<div id ="player4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title" id="p4-name">Player 4Name</h3>
+				</div>
+				<div class= "panel-body">
+					<img id= "p4-img" src=""><p>img4</p>
+					<h2 class="current-score" id="p4-score">Player 4score</h2>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <!-- Script -->
+    <script src="app.js"></script>
 </body>
 </html>
