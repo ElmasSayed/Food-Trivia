@@ -108,4 +108,66 @@
 
   }
 
+//Player entry and Disconnect Handling
 
+  function getInGame() {
+  //To send disconnect message to chat
+    var chatDataDisc = database.ref("/chat/" + Date.now());
+
+    if (currentPlayers < 4) {
+      if(playerOneExists) {
+        
+        if (playerTwoExists) {
+        	if (playerThreeExists) {
+        		playerNum = 4;
+        	} else {	
+        		playerNum = 3;
+        	}
+        } else {
+        	playerNum = 2;
+        }
+      } else {
+      	playerNum = 1;
+      }
+    
+
+    //Key based on player number
+    playerRef = database.ref("/players/" + playerNum);
+
+    //Player object
+    playerRef.set({
+    	name: username,
+    	points: 0,
+    	active: null
+    });
+
+    // Remove player object on disconnect
+    playerRef.onDisconnect().remove();
+
+    //If a user disconnects, end the current game by setting null
+    currentTurnRef.onDisconnect().remove();
+
+    //Send disconnect message to chat
+    chatDataDisc.onDisconnect().set({
+    	name: username,
+    	time: firebase.database.ServerValue.TIMESTAMP,
+    	message: "has disconnected.",
+    	idNum: 0
+    });
+
+    //Remove name from input box
+    $("#swap-zone").html("<h2>Hi " + username + "! You are Player " + playerNum + "</h2>");
+
+  } else {
+  	$("#swap-zone").html("<h2> Sorry, Game Full! Try Again Later!</h2>");
+  }
+ }
+
+
+// Start the game if four players
+ playersRef.on("child_added", function(snapshot) {
+ 	if (currentPlayers === 4) {
+ 		//set turn to 1, which starts the game
+ 		currentTurnRef.set(1);
+ 	}
+ });
