@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GamePlay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Modern+Antiqua" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="bootstrap.min.css"> -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="logic.js"></script>
+</head>
+<body>
+     <div class="col-lg-12 mainHeading" >
+        <center><h1>Pictionology</h1></center>
+        <!-- Button trigger modal -->
+        <a class="myModal" href="#" data-toggle="modal" data-target="#myModal">How To Play</a>
+     </div>
+    
+    <!-- Main container -->  
+    <div class="container-fluid" id="mainContainer">
+
+        <!-- 1st row ------------------------------------------------------------------------------------------------------------- -->
+        <!-- Log In --> 
+        <div class="row row1">
+            <div class="col-md-12">
+                <div class="col-md-5 login-panel">
+                    <input type="text" class="login-input" placeholder="Your name"/>
+                    <select class="login-types">
+                        <option value="p0">(Choose type)</option>
+                        <option value="p1">Main Player</option>
+                        <option value="pX">Teammate</option>
+                    </select>
+                    <button class="btn btn-primary login-button">Login</button>
+                </div>
+                <!-- Categories -->
+                <div class="col-lg-7 category-panel">
+                    <label class="category-select">Select:</label>
+                    <button class="btn btn-primary category-button">Movies</button> 
+                    <button class="btn btn-primary category-button">Celebrities</button> 
+                    <button class="btn btn-primary category-button">Buildings</button>
+                </div>
+            </div>
+        </div><!--End 1st row-->
+
+        <!-- 2nd row ------------------------------------------------------------------------------------------------------------- -->
+        <div class="row row2" >
+            
+            <div class="col-lg-12 allPlayers">
+                <!--Player 1 - master player -->
+               
+                <div class="col-lg-4">
+                        <div id="player1-panel">
+                            <div class="col-lg-12 ">
+                                <img class="avatar" src="images/player1.gif">
+                            </div>
+                            <div class="col-lg-12 teammate">
+                                <span>Hitman</span>
+                                <span class="pointslabel">points</span>
+                                <span class="badge points">82</span>
+                            </div>
+                        </div>
+                    </div>
+
+              <!--Player 2,3 & 4-->
+                <div class="col-lg-8">
+
+                    <div class="col-lg-4">
+                        <div id="player2-panel" >
+                            <div class="col-lg-12">
+                                <img class="avatar" src="images/player2.gif">
+                            </div>
+                            <div class="col-lg-12 teammate">
+                                <span>Prince</span>
+                                <span class="pointslabel">points</span>
+                                <span class="badge points">42</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div id="player3-panel"  >
+                            <div class="col-lg-12">
+                                <img class="avatar" src="images/player3.gif">
+                            </div>
+                            <div class="col-lg-12 teammate">
+                                <span>Aariana</span>
+                                <span class="pointslabel">points</span>
+                                <span class="badge points">42</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="col-lg-12">
+                            <img class="avatar" src="images/player4.gif">
+                        </div>
+                        <div class="col-lg-12 teammate">
+                            <span>Kevin</span>
+                            <span class="pointslabel">points</span>
+                            <span class="badge points">42</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div> <!--2nd row-->
+
+        <!-- 3rd row ------------------------------------------------------------------------------------------------------ -->
+        <div class="row">
+        
+            <div class="col-lg-4">
+                <div class="col-lg-12">
+                    <img class="question-image" src="images/image-question.gif">
+                </div>               
+                <!-- Answer input panel -->
+                <div class="col-lg-12 answer-panel">
+                    <!--Player Credit-->
+                    <label>Player Credit:</label>
+                    <select class="answer-player-credit">
+                        <option value="p0">(Choose one)</option>
+                        <option value="player2">Teammate-1</option>
+                        <option value="player3">Teammate-2</option>
+                        <option value="player4">Teammate-3</option>
+                    </select>
+                    <!-- Answer -->
+                    <input class="answer-input" type="text" placeholder="Enter answer here"><br>
+                    <!-- Answer Button-->
+                    <button class="btn btn-primary answer-image-btn">Submit</button>
+                </div>
+            </div>       
+
+            <!-- Chat Panel -->
+            <div class="col-lg-8 chat-panel">  
+                <div class="col-lg-12">
+                    <!-- chat box -->
+                    <div class="col-lg-8 chat-message-list"> 
+                        <p> <b>Aariana:</b>  Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <p> <b>Kevin: </b>  ap into electronic typesetting,essentially unchanged. It was popularised in the</p>
+                        <p> <b>Prince: </b> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an</p>
+                        <p> <b>Aariana: </b> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <p> <b>Kevin: </b>  ap into electronic typesetting, remaining essentially unchanged. It was popularised in the</p>
+                        <p> <b>Prince: </b> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an</p>
+                    </div>
+                    <!-- Timer-->
+                    <div class="col-lg-4">
+                          <img class= "timer" src="https://i.makeagif.com/media/10-22-2014/xLHyPA.gif">
+                    </div>
+                </div>
+                
+                <div class="col-lg-12">
+
+                    <!-- chat message -->
+                    <div class="col-lg-12 chat-message">
+                        <label>Message:</label>
+                        <input class="chat-input" type="text">
+                    </div>
+
+                    <!-- Chat Send-Message and Foul-Play buttons -->
+                    <div class="col-lg-12">
+                        <button class="btn btn-primary chat-send-button">
+                            Send Message
+                        </button>
+                        <button class="btn btn-danger chat-foul-button" onclick="return confirm('F O U L  P L A Y, Are you sure ?')">
+                            Foul Play
+                        </button> 
+                    </div>
+
+                </div>
+            </div>
+        </div><!--3rd Row-->    
+   
+        <!----------------------------------------------------------------------------------------------------- -->
+    
+     </div><!--End mainContainer -->
+
+     <!--THE END--------------------------------------------------------------------------------------------------- -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body" style="color: black;">
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    Why do we use it?
+                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+                 </p> 
+       
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal end-->
+   
+</body>
+</html>
