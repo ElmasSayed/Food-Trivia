@@ -75,7 +75,8 @@
 
     if (playerTwoExists) {
       $("#p2-name").text(playerTwoName.name);
-      //todo add pic
+      //todo get pic from giphy
+      $("#p2-img").attr("src", );
       $("#p2-score").text(playerTwoData.points + " points");
     }
     else {
@@ -169,5 +170,12 @@
  	if (currentPlayers === 4) {
  		//set turn to 1, which starts the game
  		currentTurnRef.set(1);
+
+ 		//check if an active player flag is set on only one player
+ 		var actives = 0;
+
+ 		if () {
+ 			
+ 		}
  	}
  });
