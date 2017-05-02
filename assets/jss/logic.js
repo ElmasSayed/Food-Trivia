@@ -11,10 +11,10 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var chatData = database.ref("/chat");
 var playersRef = database.ref("players");
-var currentTurnRef = database.ref("turn");
+var currentStageRef = database.ref("stage");
 var username = "Guest";
 var currentPlayers = null;
-var currentTurn = null;
+var currentStage = null;
 var playerNum = false;
 var playerOneExists = false;
 var playerTwoExists = false;
@@ -81,17 +81,17 @@ $("#chat-send").click(function() {
     });
 
     // check for answer.  
-    if (currentTurn === 1) {
+    if (currentStage === 1) {
       
       if (message.toLowerCase() == currentAnswer.toLowerCase()) {
         
         
-        $("#current-turn").html("<h2>Player " + playerNum + " wins.")
+        $("#current-stage").html("<h2>Player " + playerNum + " wins.")
         if (playerNum === 1) {
-          currentTurnRef.set(2);
-          console.log("CurrentturnRef set to turn 2");
+          currentStageRef.set(2);
+          console.log("currentStageRef set to stage 2");
         } else {
-          currentTurnRef.set(3);
+          currentStageRef.set(3);
         }
       }
     }
@@ -220,18 +220,18 @@ playersRef.on("value", function(snapshot) {
 });
 
 // TODO Change logic
-// Detects changes in current turn key
-currentTurnRef.on("value", function(snapshot) {
+// Detects changes in current stage key
+currentStageRef.on("value", function(snapshot) {
 
-  // Gets current turn from snapshot
-  currentTurn = snapshot.val();
-  console.log(currentTurn + " snapshot.val in cTurnRef");
+  // Gets current stage from snapshot
+  currentStage = snapshot.val();
+  console.log(currentStage + " snapshot.val in cStageRef");
 
   // Don't do the following unless you're logged in
   if (playerNum) {
 
-    // For turn 1
-    if (currentTurn === 1) {
+    // For stage 1
+    if (currentStage === 1) {
       //Pick Random Country see Kathrin
       //currentAnswer
       currentAnswer = "test";
@@ -242,7 +242,7 @@ currentTurnRef.on("value", function(snapshot) {
       //Initialize Timer
     }
     //Player 1 got it right
-    else if (currentTurn === 2) {
+    else if (currentStage === 2) {
       //Show Result
 
 
@@ -260,7 +260,7 @@ currentTurnRef.on("value", function(snapshot) {
 
         // check to make sure players didn't leave before timeout
         if (playerOneExists && playerTwoExists) {
-          currentTurnRef.set(1);
+          currentStageRef.set(1);
         }
       };
 
@@ -269,7 +269,7 @@ currentTurnRef.on("value", function(snapshot) {
       //  show results for 2 seconds, then resets
       setTimeout(moveOn, 2000);
     //Player 2 got it right
-    } else if (currentTurn === 3) {
+    } else if (currentStage === 3) {
 
     }
 
@@ -278,7 +278,7 @@ currentTurnRef.on("value", function(snapshot) {
       //  if (playerNum) {
       //    $("#player" + playerNum + " ul").empty();
       //  }
-      $("#current-turn").html("<h2>Waiting for another player to join.</h2>");
+      $("#current-stage").html("<h2>Waiting for another player to join.</h2>");
       
     }
   }
@@ -289,9 +289,9 @@ playersRef.on("child_added", function(snapshot) {
 
   if (currentPlayers === 1) {
 
-    // set turn to 1, which starts the game
-    currentTurnRef.set(1);
-    console.log("playersRef set currentTurn to 1");
+    // set stage to 1, which starts the game
+    currentStageRef.set(1);
+    console.log("playersRef set currentStage to 1");
   }
 });
 
@@ -326,8 +326,8 @@ function getInGame() {
     // On disconnect remove this user's player object
     playerRef.onDisconnect().remove();
 
-    // If a user disconnects, set the current turn to 'null' so the game does not continue
-    currentTurnRef.onDisconnect().remove();
+    // If a user disconnects, set the current stage to 'null' so the game does not continue
+    currentStageRef.onDisconnect().remove();
 
     // Send disconnect message to chat with Firebase server generated timestamp and id of '0' to denote system message
     chatDataDisc.onDisconnect().set({
